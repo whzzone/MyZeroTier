@@ -1,0 +1,69 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/detail/index",
+			"style": {
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/profile/index",
+			"style": {
+				"navigationBarTitleText": "账号信息"
+			}
+		},
+		{
+			"path": "pages/webview/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#ffb441",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"iconWidth": "24px",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/index.png",
+			"selectedIconPath": "static/icon/index_ed.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/mine/index",
+			"iconPath": "static/icon/mine.png",
+			"selectedIconPath": "static/icon/mine_ed.png",
+			"text": "我的"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "MyZeroTier",
+		"navigationBarBackgroundColor": "#ffb441",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	}
+}
