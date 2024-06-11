@@ -36,9 +36,15 @@
 				</u-col>
 			</u-row>
 
-			<u-row customStyle="margin: 10px" v-for="(item, index) in network.config.routes" :key="index">
-				<u-col span="12">
-					<view class="">{{item.target}}</view>
+			<u-row justify="space-between" customStyle="margin: 10px" v-for="(item, index) in network.config.routes" :key="index">
+				<u-col span="7">
+					<view class="">target：{{item.target}}</view>
+				</u-col>
+				<u-col span="5" v-if="item.via">
+					<view class="">via：{{item.via}}</view>
+				</u-col>
+				<u-col span="4" v-else>
+						<view class="">(LAN)</view>
 				</u-col>
 			</u-row>
 		</view>
