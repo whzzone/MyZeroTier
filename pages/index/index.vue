@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<u-loading-page :loading="loading"></u-loading-page>
 		<view>
 			<u-row customStyle="margin: 10px">
 				<u-col span="4">
@@ -15,7 +16,7 @@
 			<u-cell-group>
 				<view style="white-space: pre;">
 					<u-cell v-for="(item, index) in networks" :key="index" isLink
-						:url="`/pages/detail/index?networkId=${item.id}`" center>
+						:url="`/pages/network/update/index?networkId=${item.id}`" center>
 						<template slot="title">
 							<view style="display: flex; align-items: center;">
 								<u-tag :text="item.config.private ? '私人' : '公开'" plain size="mini"
@@ -50,6 +51,7 @@
 		data() {
 			return {
 				networks: [],
+				loading: true,
 			}
 		},
 
@@ -61,20 +63,23 @@
 			this.getData()
 		},
 
-		onLoad() {
+		onReady() {
 			setTimeout(() => {
 				if (this.isLogin(false)) {
 					this.getData()
 				}
-			}, 500)
+			}, 2000)
 		},
 
 		methods: {
 			getData() {
+				this.loading = true
+			
 				this.$api.getNetworkList().then(res => {
 					this.networks = res
 				}).finally(() => {
 					uni.stopPullDownRefresh()
+					this.loading = false
 				})
 			},
 			handleAddNetwork() {

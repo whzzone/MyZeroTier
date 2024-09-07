@@ -3,7 +3,7 @@
 		<view style="margin: 6px;">
 			<u-row customStyle="margin: 10px;">
 				<u-col span="12">
-					<view class="" style="font-weight: bold;">基础</view>
+					<view class="" style="font-weight: bold;">基础信息</view>
 				</u-col>
 			</u-row>
 			<u-row customStyle="margin: 10px">
@@ -25,6 +25,16 @@
 			<u-row customStyle="margin: 10px">
 				<u-col span="12">
 					<view class="">访问控制：{{network.config.private ? '私人' : '公开'}}</view>
+				</u-col>
+			</u-row>
+			<u-row customStyle="margin: 10px">
+				<u-col span="12">
+					<view class="">创建时间：{{timestampToTime(network.config.creationTime)}}</view>
+				</u-col>
+			</u-row>
+			<u-row customStyle="margin: 10px">
+				<u-col span="12">
+					<view class="">更新时间：{{timestampToTime(network.config.lastModified)}}</view>
 				</u-col>
 			</u-row>
 		</view>
@@ -101,7 +111,7 @@
 					</u-row>
 					<u-row customStyle="margin: 10px;">
 						<u-col span="12">
-							<view class="" style="font-weight: bold;">最近在线：{{formatTime(item.lastOnline)}}</view>
+							<view class="" style="font-weight: bold;">最近在线：{{timestampToTime(item.lastOnline)}}</view>
 						</u-col>
 					</u-row>
 					<view style="width: 60%;margin: 0px auto;">
@@ -112,7 +122,9 @@
 		</view>
 		
 		<view style="width: 90%;margin: 30px auto;">
+			<u-button v-if="network" @click="handleNetworkUpdate" shape="circle" type="primary" text="编 辑 网 络"></u-button>
 			<u-button v-if="network" @click="handleNetworkDelete" shape="circle" type="error" text="删 除 网 络"></u-button>
+		
 		</view>
 	</view>
 </template>
@@ -146,6 +158,7 @@
 			this.getData(options.networkId)
 		},
 		methods: {
+			timestampToTime,
 			getData(id) {
 				this.$api.getNetwork(id).then(res => {
 					this.network = res
@@ -189,6 +202,12 @@
 					}
 				})
 			},
+			handleNetworkUpdate() {
+				uni.navigateTo({
+					url: `/pages/network/update/index?networkId=${this.network.id}`
+				})
+				
+			},
 			handleNetworkDelete() {
 				uni.showModal({
 					title:'提示',
@@ -214,9 +233,6 @@
 						}
 					}
 				})
-			},
-			formatTime(value) {
-				return timestampToTime(value)
 			},
 		}
 	}

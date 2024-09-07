@@ -7,7 +7,8 @@ export default {
 	 */
     getNetworkList(){
         return request({
-			url: '/network'
+			url: '/network',
+			showLoading: false,
 		})
     },
 
@@ -17,7 +18,8 @@ export default {
 	 */
     getNetwork(id){
         return request({
-			url: '/network/' + id
+			url: '/network/' + id,
+			showLoading: false,
 		})
     },
 
@@ -27,7 +29,8 @@ export default {
 	 */
 	getNetworkMemberList(id){
 	    return request({
-			url: '/network/' + id + '/member'
+			url: '/network/' + id + '/member',
+			showLoading: false,
 		})
 	},
 
@@ -97,6 +100,18 @@ export default {
 		return request({
 			url: `/network/${networkId}/member/${memberId}`,
 			method: 'DELETE',
+		})
+	},
+	
+	/**
+	 * 更新网络
+	 * @param {string} networkId 网络id
+	 */
+	updateNetwork(data) {
+		return request({
+			url: `/network/${data.id}`,
+			method: 'POST',
+			data: data
 		})
 	},
 }
